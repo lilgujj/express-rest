@@ -3,7 +3,7 @@ const server = express();
 const port = 3000;
 let movieLibrary = [
     {
-        title: "hej",
+        title: "Deadpool",
         description: "red man in tight leggings tell jokes",
         id: 1,
         price: 49
@@ -42,7 +42,7 @@ server.put("/movies/:id", (req,res) => {
     const { id } = req.params;
     const { title, description, price } = req.body;
     const updatedMovie = movieLibrary.find((movie) => movie.id == id);
-    
+
     if(title) updatedMovie.title = title
     if(description) updatedMovie.description = description
     if(price) updatedMovie.price = price

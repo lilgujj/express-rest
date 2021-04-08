@@ -22,7 +22,7 @@ PUT http://localhost:3000/movies/1
 Content-Type: application/json
 
 {
-    "title": "Zlatan",
-    "description": "bra film",
+    "title": "Zlatans Historia",
+    "description": "hur Zlatan blev den han blev",
     "price": 1000
 }
