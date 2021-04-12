@@ -5,7 +5,7 @@ const port = 3000;
 let movieLibrary = [
     {
         title: "Batman",
-        description: "man inte dark leather suite fight people",
+        description: "man in dark leather suite fight people",
         id: 20,
         price: 39,
     },
@@ -49,14 +49,13 @@ server.delete("/movies/:id", (req,res) => {
 server.put("/movies/:id", (req,res) => {
     const id = req.params.id;
     const { title, description, price } = req.body;
-    const updatedMovie = movieLibrary.find((movie) => movie.id == id);
+    const updatedMovie = movieLibrary.find(movie => movie.id == id);
 
     if(title) updatedMovie.title = title
     if(description) updatedMovie.description = description
     if(price) updatedMovie.price = price
 
     res.json(updatedMovie)
-
 })
 
 

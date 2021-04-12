@@ -14,11 +14,11 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/movies/101
+DELETE http://localhost:3000/movies/20
 
 ###
 
-PUT http://localhost:3000/movies/1
+PUT http://localhost:3000/movies/20
 Content-Type: application/json
 
 {
