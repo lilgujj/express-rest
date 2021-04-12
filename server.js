@@ -4,10 +4,16 @@ const port = 3000;
 let movieLibrary = [
     {
         title: "Deadpool",
-        description: "red man in tight leggings tell jokes",
+        description: "man in tight red leggings tell jokes and killing people",
         id: 1,
         price: 49
-    }
+    },
+    {
+        title: "Batman",
+        description: "man inte dark leather suite fight people",
+        id: 2,
+        price: 39
+    },
 ];
 
 server.use(express.json());
@@ -26,15 +32,21 @@ server.post("/movies/", (req,res) => {
 
 // Delete movie
 server.delete("/movies/", (req,res) => {
-    movieLibrary.map(item => {
-        // change string to title of the movie u wish to remove
-        if(item.title === "hej"){
-            const removedMovie = movieLibrary.splice(item, 1)
-            res.json(removedMovie)
-        } if(item.title === null | undefined) {
-            res.status(404).json("No movie found with that name")
-        }
-    })
+    const index = movieLibrary.findIndex(movie => movie.title === "Batman");
+    const removedMovie = movieLibrary.splice(index,1);
+    res.json(removedMovie)
+
+    // movieLibrary.map(item => {
+    //     // change string to title of the movie u wish to remove
+    //     if(item.title === "Batman"){
+    //         console.log(item)
+    //         const removedMovie = movieLibrary.splice(item, 1)
+    //         res.json(removedMovie)
+    //         return
+    //     } if(item.title === null | undefined) {
+    //         res.status(404).json("No movie found with that name")
+    //     }
+    // })
 })
 
 // change movie

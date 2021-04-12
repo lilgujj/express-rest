@@ -6,10 +6,10 @@ POST http://localhost:3000/movies/
 Content-Type: application/json
 
 {
-    "title": "banan",
-    "description": "red man in tight leggings tell jokes",
-    "id": 2,
-    "price": 49
+    "title": "test",
+    "description": "test",
+    "id": 3,
+    "price": null
 }
 
 ###
