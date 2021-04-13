@@ -6,15 +6,9 @@
     "price": 39
   },
   {
-    "title": "Deadpool",
-    "description": "man in tight red leggings tell jokes and killing people",
+    "title": "Zlatans Historia",
+    "description": "hur Zlatan blev den han blev",
     "id": 2,
-    "price": 49
-  },
-  {
-    "title": "test",
-    "description": "test",
-    "id": 3,
-    "price": null
+    "price": 1000
   }
 ]

@@ -38,29 +38,45 @@ server.post("/movies/", (req,res) => {
 
 // Delete movie
 server.delete("/movies/:id", (req,res) => {
-    
+
     const { id } = req.params;
-    const deletedMovie = jsonData.findIndex(item => item.id == id);
-    const movie = jsonData.find(item => item.id == id);
-    if (movie) {
-        const deleted = jsonData.splice(deletedMovie, 1)
-        return res.json(deleted)
-    } if(!movie) {
-        res.json("selected movie does not exist")
-    }
+
+    fs.readFile(jsonData, (err,data) => {
+        const movies = JSON.parse(data.toString());
+        const deletedMovie = movies.findIndex(item => item.id == id);
+        const movie = movies.find(item => item.id == id);
+        if (movie) {
+           movies.splice(deletedMovie, 1)
+        } if(!movie) {
+            res.json("selected movie does not exist")
+        }
+
+        fs.writeFile(jsonData, JSON.stringify(movies, null, 2), () => {
+            res.status(200).send(movies)
+        })
+
+    })
 })
 
 // change movie
 server.put("/movies/:id", (req,res) => {
-    const { id } = req.params;
-    const { title, description, price } = req.body;
-    const updatedMovie = jsonData.find(movie => movie.id == id);
 
-    if(title) updatedMovie.title = title
-    if(description) updatedMovie.description = description
-    if(price) updatedMovie.price = price
+    const {id} = req.params;
 
-    res.json(updatedMovie)
+    fs.readFile(jsonData, (err,data) => {
+        const movies = JSON.parse(data.toString())
+        const { title, description, price } = req.body;
+
+        const updatedMovie = movies.find(movie => movie.id == id);
+
+        if(title) updatedMovie.title = title
+        if(description) updatedMovie.description = description
+        if(price) updatedMovie.price = price
+
+        fs.writeFile(jsonData, JSON.stringify(movies, null, 2), () => {
+            res.status(200).send(movies)
+        })
+    })
 })
 
 
