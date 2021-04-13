@@ -24,12 +24,21 @@ server.get("/movies/", (req,res) => {
 
 // Add movie
 server.post("/movies/", (req,res) => {
-    jsonData.push(req.body)
-    res.json(jsonData)
+    fs.readFile(jsonData, (err,data) => {
+        const movies = JSON.parse(data.toString())
+        const movie = req.body
+        
+        movies.push(movie)
+
+        fs.writeFile(jsonData, JSON.stringify(movies, null, 2), () => {
+            res.status(200).send(movies)
+        })
+    })
 })
 
 // Delete movie
 server.delete("/movies/:id", (req,res) => {
+    
     const { id } = req.params;
     const deletedMovie = jsonData.findIndex(item => item.id == id);
     const movie = jsonData.find(item => item.id == id);
