@@ -12,7 +12,7 @@ server.use(express.json());
 server.get("/movies/", (req,res) => {
     fs.readFile(jsonData, (err, data) => {
         if(err) {
-            res.status(500).json("No movies found, 404")
+            res.status(204).json("ERROR, no movies found")
         } else {
             const movies = JSON.parse(data.toString())
             res.status(200).json(movies)
@@ -32,7 +32,7 @@ server.post("/movies/", (req,res) => {
         movies.push(movie)
 
         fs.writeFile(jsonData, JSON.stringify(movies, null, 2), () => {
-            res.status(200).send(movies)
+            res.status(201).send(movies)
         })
     })
 })
