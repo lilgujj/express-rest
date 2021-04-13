@@ -1,0 +1,14 @@
+[
+    {
+        "title": "Batman",
+        "description": "man in dark leather suite fight people",
+        "id": 1,
+        "price": 39
+    },
+    {
+        "title": "Deadpool",
+        "description": "man in tight red leggings tell jokes and killing people",
+        "id": 2,
+        "price": 49
+    }
+]

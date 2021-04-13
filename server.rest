@@ -8,17 +8,17 @@ Content-Type: application/json
 {
     "title": "test",
     "description": "test",
-    "id": 2,
+    "id": 3,
     "price": null
 }
 
 ###
 
-DELETE http://localhost:3000/movies/20
+DELETE http://localhost:3000/movies/2
 
 ###
 
-PUT http://localhost:3000/movies/20
+PUT http://localhost:3000/movies/1
 Content-Type: application/json
 
 {

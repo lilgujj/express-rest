@@ -1,21 +1,10 @@
-const { response } = require("express");
+
 const express = require("express");
 const server = express();
+const fs = require("fs");
+
+const jsonData = ("movies.json")
 const port = 3000;
-let movieLibrary = [
-    {
-        title: "Batman",
-        description: "man in dark leather suite fight people",
-        id: 20,
-        price: 39,
-    },
-    {
-        title: "Deadpool",
-        description: "man in tight red leggings tell jokes and killing people",
-        id: 10,
-        price: 49,
-    }
-];
 
 server.use(express.json());
 
@@ -23,22 +12,29 @@ server.use(express.json());
 
 // GET's all movies
 server.get("/movies/", (req,res) => {
-    res.json(movieLibrary);
+    fs.readFile(jsonData, (err, data) => {
+        if(err) {
+            res.status(404).json("No movies found, 404")
+        } else {
+            const movies = JSON.parse(data.toString())
+            res.status(200).json(movies)
+        }
+    }) 
 })
 
 // Add movie
 server.post("/movies/", (req,res) => {
-    movieLibrary.push(req.body)
-    res.json(movieLibrary)
+    jsonData.push(req.body)
+    res.json(jsonData)
 })
 
 // Delete movie
 server.delete("/movies/:id", (req,res) => {
     const { id } = req.params;
-    const deletedMovie = movieLibrary.findIndex(item => item.id == id);
-    const movie = movieLibrary.find(item => item.id == id);
+    const deletedMovie = jsonData.findIndex(item => item.id == id);
+    const movie = jsonData.find(item => item.id == id);
     if (movie) {
-        const deleted = movieLibrary.splice(deletedMovie, 1)
+        const deleted = jsonData.splice(deletedMovie, 1)
         return res.json(deleted)
     } if(!movie) {
         res.json("selected movie does not exist")
@@ -47,9 +43,9 @@ server.delete("/movies/:id", (req,res) => {
 
 // change movie
 server.put("/movies/:id", (req,res) => {
-    const id = req.params.id;
+    const { id } = req.params;
     const { title, description, price } = req.body;
-    const updatedMovie = movieLibrary.find(movie => movie.id == id);
+    const updatedMovie = jsonData.find(movie => movie.id == id);
 
     if(title) updatedMovie.title = title
     if(description) updatedMovie.description = description
