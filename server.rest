@@ -18,11 +18,11 @@ DELETE http://localhost:3000/movies/3
 
 ###
 
-PUT http://localhost:3000/movies/2
+PUT http://localhost:3000/movies/3
 Content-Type: application/json
 
 {
     "title": "Zlatans Historia",
-    "description": "hur Zlatan blev den han blev",
+    "description": "hur lejonet blev den han blev",
     "price": 1000
 }

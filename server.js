@@ -1,4 +1,3 @@
-
 const express = require("express");
 const server = express();
 const fs = require("fs");
@@ -9,7 +8,6 @@ const port = 3000;
 server.use(express.json());
 
 // endpoints
-
 // GET's all movies
 server.get("/movies/", (req,res) => {
     fs.readFile(jsonData, (err, data) => {
@@ -25,6 +23,9 @@ server.get("/movies/", (req,res) => {
 // Add movie
 server.post("/movies/", (req,res) => {
     fs.readFile(jsonData, (err,data) => {
+        if(err) {
+            res.json("ERROR, could not add movie")
+        }
         const movies = JSON.parse(data.toString())
         const movie = req.body
         
@@ -42,6 +43,9 @@ server.delete("/movies/:id", (req,res) => {
     const { id } = req.params;
 
     fs.readFile(jsonData, (err,data) => {
+        if(err) {
+            res.json("ERROR, no movie to delete")
+        }
         const movies = JSON.parse(data.toString());
         const deletedMovie = movies.findIndex(item => item.id == id);
         const movie = movies.find(item => item.id == id);
@@ -64,6 +68,9 @@ server.put("/movies/:id", (req,res) => {
     const {id} = req.params;
 
     fs.readFile(jsonData, (err,data) => {
+        if(err) {
+            res.json("ERROR, no movie to be edited")
+        }
         const movies = JSON.parse(data.toString())
         const { title, description, price } = req.body;
 

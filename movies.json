@@ -6,9 +6,15 @@
     "price": 39
   },
   {
-    "title": "Zlatans Historia",
-    "description": "hur Zlatan blev den han blev",
+    "title": "Deadpool",
+    "description": "Guy in red dress killing people for fun",
     "id": 2,
+    "price": 39
+  },
+  {
+    "title": "Zlatans Historia",
+    "description": "hur lejonet blev den han blev",
+    "id": 3,
     "price": 1000
   }
 ]
