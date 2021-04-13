@@ -12,7 +12,7 @@ server.use(express.json());
 server.get("/movies/", (req,res) => {
     fs.readFile(jsonData, (err, data) => {
         if(err) {
-            res.status(404).json("No movies found, 404")
+            res.status(500).json("No movies found, 404")
         } else {
             const movies = JSON.parse(data.toString())
             res.status(200).json(movies)
@@ -24,7 +24,7 @@ server.get("/movies/", (req,res) => {
 server.post("/movies/", (req,res) => {
     fs.readFile(jsonData, (err,data) => {
         if(err) {
-            res.json("ERROR, could not add movie")
+            res.status(500).json("ERROR, could not add movie")
         }
         const movies = JSON.parse(data.toString())
         const movie = req.body
@@ -44,7 +44,7 @@ server.delete("/movies/:id", (req,res) => {
 
     fs.readFile(jsonData, (err,data) => {
         if(err) {
-            res.json("ERROR, no movie to delete")
+            res.status(500).json("ERROR, no movie to delete")
         }
         const movies = JSON.parse(data.toString());
         const deletedMovie = movies.findIndex(item => item.id == id);
@@ -69,7 +69,7 @@ server.put("/movies/:id", (req,res) => {
 
     fs.readFile(jsonData, (err,data) => {
         if(err) {
-            res.json("ERROR, no movie to be edited")
+            res.status(500).json("ERROR, no movie to be edited")
         }
         const movies = JSON.parse(data.toString())
         const { title, description, price } = req.body;
